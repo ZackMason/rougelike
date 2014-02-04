@@ -14,6 +14,7 @@
 #define MAP_STAIR_DOWN	'<'
 #define MAIN_PLAYER	'@'
 
+int levelReached = 1;
 
 typedef struct map_s {
     int		width, height;
@@ -207,9 +208,10 @@ void updateScreen(game_t *game)
 	mvprintw(player->y, player->x, "%c", player->ch);
     }
 
-    if (getMapTile(game->map, game->player->y - 1,
+    if (getMapTile(game->map, game->player->y,
 		   game->player->x) == MAP_STAIR_UP) {
 	    drawMap(game);
+	    ++levelReached;
     }
     refresh();
 }
